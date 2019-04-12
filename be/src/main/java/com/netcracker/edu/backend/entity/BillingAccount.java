@@ -1,58 +1,59 @@
 package com.netcracker.edu.backend.entity;
 
+import org.hibernate.annotations.Generated;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "billing_account")
 public class BillingAccount {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String address;
-    private String username;
-    private String email;
+    @Column(name = "id")
+    private Long id;
 
-    public BillingAccount(String address, String username, String email) {
-        this.address = address;
-        this.username = username;
-        this.email = email;
+    @Column(name = "Number")
+    private Long number;
+
+    @OneToOne (cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinColumn(name = "walletId", referencedColumnName = "id")
+    private Wallet wallet;
+
+    public BillingAccount() {}
+
+    public BillingAccount(Long id, Long number, Wallet wallet) {
+        this.id = id;
+        this.number = number;
+        this.wallet = wallet;
     }
 
-    public BillingAccount() {
-
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getAddress() {
-        return address;
+    public Long getNumber() {
+        return number;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setNumber(Long number) {
+        this.number = number;
     }
 
-    public String getUsername() {
-        return username;
+    public Wallet getWallet() {
+        return wallet;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
     }
 
     @Override
@@ -60,25 +61,13 @@ public class BillingAccount {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BillingAccount that = (BillingAccount) o;
-        return id == that.id &&
-                Objects.equals(address, that.address) &&
-                Objects.equals(username, that.username) &&
-                Objects.equals(email, that.email);
+        return Objects.equals(id, that.id) &&
+                Objects.equals(number, that.number) &&
+                Objects.equals(wallet, that.wallet);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(id, address, username, email);
-    }
-
-    @Override
-    public String toString() {
-        return "BillingAccount{" +
-            "id=" + id +
-            ", address='" + address + '\'' +
-            ", username='" + username + '\'' +
-            ", email='" + email + '\'' +
-            '}';
+        return Objects.hash(id, number, wallet);
     }
 }

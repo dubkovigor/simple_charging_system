@@ -3,6 +3,7 @@ package com.netcracker.edu.fapi.controller;
 import com.netcracker.edu.fapi.models.User;
 import com.netcracker.edu.fapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +17,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userService.findAll();
     }
 
@@ -27,8 +27,11 @@ public class UserController {
         return userService.findByLogin(login);
     }
 
-    @RequestMapping(value="/signup", method = RequestMethod.POST, produces = "application/json")
-    public User saveUser(@RequestBody User user){
-        return userService.save(user);
+    @PostMapping(value ="")
+    public ResponseEntity<User> save(@RequestBody User user) {
+        if (user != null) {
+            return ResponseEntity.ok(userService.save(user));
+        }
+        return null;
     }
 }

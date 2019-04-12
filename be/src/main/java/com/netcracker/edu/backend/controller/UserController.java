@@ -11,17 +11,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-
-    @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/login/{login}", method = RequestMethod.GET)
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping(value = "/login/{login}")
     public ResponseEntity<User> getUserByLogin(@PathVariable(name = "login") String login) {
         User user = userService.findByLogin(login);
         return ResponseEntity.ok(user);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @GetMapping(value = "")
     public List<User> getAllUsers() {
         return userService.findAll();
     }
@@ -29,5 +32,11 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST)
     public User saveUser(@RequestBody User user) {
         return userService.save(user);
+    }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity delete(@PathVariable (name = "id") Long id) {
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

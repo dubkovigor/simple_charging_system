@@ -6,12 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/billing-accounts")
+@RequestMapping(value = "/api/ba")
 public class BillingAccountController {
-
     private BillingAccountService billingAccountService;
 
     @Autowired
@@ -19,29 +18,35 @@ public class BillingAccountController {
         this.billingAccountService = billingAccountService;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<BillingAccount> getBillingAccountById(@PathVariable(name = "id") Long id) {
-        Optional<BillingAccount> billingAccount = billingAccountService.getBillingAccountById(id);
-        if (billingAccount.isPresent()) {
-            return ResponseEntity.ok(billingAccount.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping(value = "")
+    public List<BillingAccount> getAllBillingAccount() {
+        return billingAccountService.findAll();
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public Iterable<BillingAccount> getAllBillingAcounts() {
-        return billingAccountService.getAllBillingAccounts();
+    @GetMapping(value = "id/{id}")
+    public BillingAccount findBillingAccountById(@PathVariable(name = "id") Long id) {
+        return billingAccountService.findById(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public BillingAccount saveBillingAccount(@RequestBody BillingAccount account) {
-        return billingAccountService.saveBillingAccount(account);
+    @GetMapping(value = "number/{number}")
+    public BillingAccount findBillingAccountByNumber(@PathVariable(name = "number") Long number) {
+        return billingAccountService.findByNumber(number);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void deleteBillingAccount(@PathVariable(name = "id") Long id) {
-        billingAccountService.deleteBillingAccount(id);
+    @GetMapping(value = "walletId/{walletId}")
+    public BillingAccount findBillingAccountByWallet(@PathVariable(name = "walletId") Long walletId) {
+        return billingAccountService.findByWalletId(walletId);
     }
 
+    @PostMapping
+    public BillingAccount saveBillingAccount(@RequestBody BillingAccount billingAccount) {
+        return billingAccountService.save(billingAccount);
+    }
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity delete(@PathVariable (name = "id") Long id) {
+        billingAccountService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
+
+

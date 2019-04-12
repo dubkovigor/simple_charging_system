@@ -5,50 +5,39 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BillingAccountViewModel {
 
-    private int id;
-    private String address;
-    private String username;
-    private String email;
+    private Long id;
+    private Long number;
+    private Long wallerID;
 
-    public BillingAccountViewModel() {
-    }
+    public BillingAccountViewModel(){}
 
-    public BillingAccountViewModel(int id, String address, String username) {
+    public BillingAccountViewModel(Long id, Long number, Long wallerID) {
         this.id = id;
-        this.address = address;
-        this.username = username;
-        this.email = email;
+        this.number = number;
+        this.wallerID = wallerID;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getAddress() {
-        return address;
+    public Long getNumber() {
+        return number;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setNumber(Long number) {
+        this.number = number;
     }
 
-    public String getUsername() {
-        return username;
+    public Long getWallerID() {
+        return wallerID;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setWallerID(Long wallerID) {
+        this.wallerID = wallerID;
     }
 }

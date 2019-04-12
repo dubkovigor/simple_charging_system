@@ -14,14 +14,17 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 
+//        ("customUserDetailsService")
 @Service("customUserDetailsService")
 public class UserServiceImpl implements UserDetailsService, UserService {
+
+    private ArrayList<User> users = new ArrayList<>();
 
     @Value("${backend.server.url}")
     private String backendServerUrl;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+//    @Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public User findByLogin(String login) {
@@ -39,7 +42,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public User save(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+//        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+//        RestTemplate restTemplate = new RestTemplate();
+//        return restTemplate.postForEntity(backendServerUrl + "/api/user", user, User.class).getBody();
+//        users.add(user);
+//        return user;
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.postForEntity(backendServerUrl + "/api/user", user, User.class).getBody();
     }

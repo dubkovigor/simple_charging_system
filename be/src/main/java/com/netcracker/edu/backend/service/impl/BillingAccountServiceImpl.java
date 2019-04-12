@@ -4,37 +4,48 @@ import com.netcracker.edu.backend.entity.BillingAccount;
 import com.netcracker.edu.backend.repository.BillingAccountRepository;
 import com.netcracker.edu.backend.service.BillingAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
-@Component
+@Service
 public class BillingAccountServiceImpl implements BillingAccountService {
 
-    private BillingAccountRepository repository;
+    private BillingAccountRepository billingAccountRepository;
 
     @Autowired
-    public BillingAccountServiceImpl(BillingAccountRepository repository) {
-        this.repository = repository;
+    public BillingAccountServiceImpl(BillingAccountRepository billingAccountRepository) {
+        this.billingAccountRepository = billingAccountRepository;
     }
 
     @Override
-    public BillingAccount saveBillingAccount(BillingAccount account) {
-        return repository.save(account);
+    public List<BillingAccount> findAll() {
+        return (List<BillingAccount>) billingAccountRepository.findAll();
     }
 
     @Override
-    public Optional<BillingAccount> getBillingAccountById(Long id) {
-        return repository.findById(id);
+    public BillingAccount findById(long id) {
+        return billingAccountRepository.findById(id);
+    }
+
+
+    @Override
+    public BillingAccount findByNumber(Long number) {
+        return billingAccountRepository.findByNumber(number);
     }
 
     @Override
-    public Iterable<BillingAccount> getAllBillingAccounts() {
-        return repository.findAll();
+    public BillingAccount findByWalletId(Long walletId) {
+        return billingAccountRepository.findByWalletId(walletId);
     }
 
     @Override
-    public void deleteBillingAccount(Long id) {
-        repository.deleteById(id);
+    public BillingAccount save(BillingAccount billingAccount) {
+        return billingAccountRepository.save(billingAccount);
+    }
+
+    @Override
+    public void delete(Long id) {
+        billingAccountRepository.deleteById(id);
     }
 }

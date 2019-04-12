@@ -1,13 +1,14 @@
 package com.netcracker.edu.backend.service;
 
-import com.netcracker.edu.backend.entity.BillingAccount;
+        import com.netcracker.edu.backend.entity.BillingAccount;
 
-import java.util.Optional;
+        import java.util.List;
 
 public interface BillingAccountService {
-
-    BillingAccount saveBillingAccount(BillingAccount account);
-    Optional<BillingAccount> getBillingAccountById(Long id);
-    Iterable<BillingAccount> getAllBillingAccounts();
-    void deleteBillingAccount(Long id);
+    List<BillingAccount> findAll();
+    BillingAccount findById(long id);
+    BillingAccount findByNumber(Long number);
+    BillingAccount findByWalletId(Long id);
+    BillingAccount save(BillingAccount billingAccount);
+    void delete(Long id);
 }

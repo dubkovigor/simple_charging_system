@@ -7,10 +7,6 @@
       "app",
       "camelCase"
     ],
-    "quotemark": [
-      true,
-      "double"
-    ],
     "component-selector": [
       true,
       "element",
