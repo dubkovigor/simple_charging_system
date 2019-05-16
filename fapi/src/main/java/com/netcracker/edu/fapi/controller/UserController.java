@@ -22,16 +22,38 @@ public class UserController {
         return userService.findAll();
     }
 
-    @GetMapping("/login/{login}")
-    public User getUserByLogin(@PathVariable String login) {
+    @PostMapping("/login")
+    public User getUserByLogin(@RequestBody String login) {
         return userService.findByLogin(login);
     }
 
-    @PostMapping(value ="")
+    @GetMapping("/firstname/{firstname}")
+    public User getUserByFirstName(@PathVariable String firstname) {
+        return userService.findByFirstName(firstname);
+    }
+
+    @PostMapping
     public ResponseEntity<User> save(@RequestBody User user) {
         if (user != null) {
             return ResponseEntity.ok(userService.save(user));
         }
         return null;
+    }
+
+    @PostMapping(value = "/join")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<User> subscribeUser(@RequestParam long service_id, @RequestBody User user){
+        return ResponseEntity.ok(userService.setServ(user, service_id));
+    }
+
+    @PostMapping(value = "/refuse")
+    public ResponseEntity<User> unsubscribeUser(@RequestParam long service_id, @RequestBody User user) {
+        return ResponseEntity.ok(userService.deleteServ(user, service_id));
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping(value = "/{id}")
+    public void deleteUser(@PathVariable(name = "id") long id) {
+        this.userService.delete(id);
     }
 }

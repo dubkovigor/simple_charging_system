@@ -10,19 +10,15 @@ public class Wallet {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "Id")
-    private Long id;
+    private long id;
 
     @Column(name = "Amount")
-    private Long amount;
-
-    @OneToOne(mappedBy = "wallet")
-    private BillingAccount billingAccount;
+    private long amount;
 
     public Wallet() {}
 
-    public Wallet(Long amount, BillingAccount billingAccount) {
+    public Wallet(long amount) {
         this.amount = amount;
-        this.billingAccount = billingAccount;
     }
 
     @Override
@@ -31,28 +27,27 @@ public class Wallet {
         if (o == null || getClass() != o.getClass()) return false;
         Wallet wallet = (Wallet) o;
         return Objects.equals(id, wallet.id) &&
-                Objects.equals(amount, wallet.amount) &&
-                Objects.equals(billingAccount, wallet.billingAccount);
+                Objects.equals(amount, wallet.amount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, amount, billingAccount);
+        return Objects.hash(id, amount);
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public Long getAmount() {
+    public long getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(long amount) {
         this.amount = amount;
     }
 

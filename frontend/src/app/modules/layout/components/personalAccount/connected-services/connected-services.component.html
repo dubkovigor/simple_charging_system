@@ -10,10 +10,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>{{connectedService.nameService}}</td>
-      <td>22.03.2019</td>
-      <td>{{connectedService.priceOfService}}$</td>
+    <tr *ngFor="let customer of customers">
+      <td>{{customer.servs.serviceName}}</td>
+
     </tr>
     <tr>
       <td>Имя #2</td>

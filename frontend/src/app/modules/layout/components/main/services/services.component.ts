@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Service } from '../../../../models/services';
+import { Service } from '../../../../models/service';
+import {HttpService} from "../../../../../services/http.service";
 
 @Component({
   selector: 'app-services',
@@ -8,15 +9,14 @@ import { Service } from '../../../../models/services';
 })
 export class ServicesComponent implements OnInit {
 
-  service: Service = {
+  services: Service[] = [];
 
-    nameService: 'Logger',
-    descriptionService: 'Онлайн генератор логотипов и элементов фирменного стиля (new).',
-    priceOfService: 6.99
-  };
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
   ngOnInit() {
+    this.httpService.getService()
+      .subscribe((data) =>this.services=data);
+
   }
 
 }

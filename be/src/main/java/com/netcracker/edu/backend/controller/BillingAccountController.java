@@ -24,17 +24,12 @@ public class BillingAccountController {
     }
 
     @GetMapping(value = "id/{id}")
-    public BillingAccount findBillingAccountById(@PathVariable(name = "id") Long id) {
+    public BillingAccount findBillingAccountById(@PathVariable(name = "id") long id) {
         return billingAccountService.findById(id);
     }
 
-    @GetMapping(value = "number/{number}")
-    public BillingAccount findBillingAccountByNumber(@PathVariable(name = "number") Long number) {
-        return billingAccountService.findByNumber(number);
-    }
-
     @GetMapping(value = "walletId/{walletId}")
-    public BillingAccount findBillingAccountByWallet(@PathVariable(name = "walletId") Long walletId) {
+    public BillingAccount findBillingAccountByWallet(@PathVariable(name = "walletId") long walletId) {
         return billingAccountService.findByWalletId(walletId);
     }
 
@@ -43,7 +38,7 @@ public class BillingAccountController {
         return billingAccountService.save(billingAccount);
     }
     @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity delete(@PathVariable (name = "id") Long id) {
+    public ResponseEntity delete(@PathVariable (name = "id") long id) {
         billingAccountService.delete(id);
         return ResponseEntity.noContent().build();
     }

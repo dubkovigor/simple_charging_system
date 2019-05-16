@@ -28,14 +28,8 @@ public class BillingAccountServiceImpl implements BillingAccountService {
         return billingAccountRepository.findById(id);
     }
 
-
     @Override
-    public BillingAccount findByNumber(Long number) {
-        return billingAccountRepository.findByNumber(number);
-    }
-
-    @Override
-    public BillingAccount findByWalletId(Long walletId) {
+    public BillingAccount findByWalletId(long walletId) {
         return billingAccountRepository.findByWalletId(walletId);
     }
 

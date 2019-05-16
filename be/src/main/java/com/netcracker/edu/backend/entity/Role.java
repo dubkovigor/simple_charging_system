@@ -1,41 +1,54 @@
 package com.netcracker.edu.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "role")
 public class Role {
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "Id")
     private long id;
 
     @Column(name = "roleName")
     private String roleName;
 
+    @OneToMany(mappedBy="role",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<User> user;
+
+    public List<User> getUser() {
+        return user;
+    }
+    public void setUser(List<User> user) {
+        this.user = user;
+    }
+
     public Role() {}
 
-    @OneToMany(mappedBy = "role",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private Set<User> users = new HashSet<>();
-
-    public Role(long id, String roleName, Set<User> users) {
-        this.id = id;
+    public Role(String roleName, List<User> user) {
         this.roleName = roleName;
-        this.users = users;
+        this.user = user;
     }
 
-    public Set<User> getRoles() {
-        return users;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role = (Role) o;
+        return Objects.equals(id, role.id) &&
+                Objects.equals(roleName, role.roleName) &&
+                Objects.equals(user, role.user);
     }
 
-    public void setRoles(Set<User> users) {
-        this.users = users;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, roleName, user);
     }
 
     public long getId() {
@@ -54,17 +67,4 @@ public class Role {
         this.roleName = roleName;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Role role = (Role) o;
-        return id == role.id &&
-                Objects.equals(roleName, role.roleName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, roleName);
-    }
 }

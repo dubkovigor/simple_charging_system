@@ -1,6 +1,5 @@
 package com.netcracker.edu.backend.entity;
 
-import org.hibernate.annotations.Generated;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -12,10 +11,11 @@ public class BillingAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private long id;
 
-    @Column(name = "Number")
-    private Long number;
+    @Column(name = "Active")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private boolean active;
 
     @OneToOne (cascade = {
             CascadeType.PERSIST,
@@ -24,28 +24,32 @@ public class BillingAccount {
     @JoinColumn(name = "walletId", referencedColumnName = "id")
     private Wallet wallet;
 
-    public BillingAccount() {}
+    public BillingAccount() {
+    }
 
-    public BillingAccount(Long id, Long number, Wallet wallet) {
-        this.id = id;
-        this.number = number;
+    public BillingAccount(boolean active) {
+        this.active = active;
+    }
+
+    public BillingAccount(boolean active, Wallet wallet) {
+        this.active = active;
         this.wallet = wallet;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public Long getNumber() {
-        return number;
+    public boolean getActive() {
+        return active;
     }
 
-    public void setNumber(Long number) {
-        this.number = number;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public Wallet getWallet() {
@@ -62,12 +66,12 @@ public class BillingAccount {
         if (o == null || getClass() != o.getClass()) return false;
         BillingAccount that = (BillingAccount) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(number, that.number) &&
+                Objects.equals(active, that.active) &&
                 Objects.equals(wallet, that.wallet);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, number, wallet);
+        return Objects.hash(id, active, wallet);
     }
 }

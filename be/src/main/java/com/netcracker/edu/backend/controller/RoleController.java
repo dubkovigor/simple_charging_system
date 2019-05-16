@@ -30,6 +30,11 @@ public class RoleController {
         return roleService.findById(id);
     }
 
+    @GetMapping(value = "roleName/{roleName}")
+    public Role findByRoleName(@PathVariable(name = "roleName") String roleName) {
+        return roleService.findByRoleName(roleName);
+    }
+
     @PostMapping
     public Role saveRole(@RequestBody Role role) {
         return roleService.save(role);

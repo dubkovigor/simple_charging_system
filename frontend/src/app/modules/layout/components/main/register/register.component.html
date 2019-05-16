@@ -3,33 +3,22 @@
     <form action="">
       <h1>Регистрация</h1>
       <div>
-        <input type="text" placeholder="Username" required="" id="username" />
+        <input type="text" placeholder="login" name="login" [(ngModel)]="user.login" #login="ngModel" required="" id="login" />
       </div>
       <div>
-        <input type="text" placeholder="login" required="" id="login" />
+        <input type="password" placeholder="password" name="password" [(ngModel)]="user.password" #password="ngModel" required="" id="password" />}}
       </div>
       <div>
-        <input type="password" placeholder="password" required="" id="password" />}}
+        <input type="password" placeholder="password" name="repeatPass" [(ngModel)]="repeatPassword" #repeatPass="ngModel" required="" id="password" />
       </div>
       <div>
-        <input type="password" placeholder="password" required="" id="password" />
+        <input type="firstName" placeholder="firstName" name="firstName" [(ngModel)]="" #repeatPass="ngModel" required="" id="firstName" />
       </div>
       <div>
-        <input type="text" placeholder="dateOfBirth" required="" id="dateOfBirth" />
+        <input type="secondName" placeholder="secondName" name="secondName" [(ngModel)]="" #repeatPass="ngModel" required="" id="secondName" />
       </div>
       <div>
-        <input type="text" placeholder="email" required="" id="email" />
-      </div>
-      <div>
-        <input type="text" placeholder="country" required="" id="country" />
-      </div>
-      <div>
-        <input type="text" placeholder="sex" required="" id="sex" />
-      </div>
-      <div>
-        <input type="submit" value="Регистрация" />
-        <a href="#">Lost your password?</a>
-        <a href="#">Register</a>
+        <input type="submit" (click)="saveUser()" value="Регистрация" />
       </div>
     </form><!-- form -->
 

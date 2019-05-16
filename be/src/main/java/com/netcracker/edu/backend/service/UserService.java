@@ -7,6 +7,9 @@ import java.util.List;
 public interface UserService {
     List<User> findAll();
     User findByLogin(String login);
+    User findById(long id);
+    User findByFirstName(String firstName);
+    User findBySecondName(String secondName);
     User save(User user);
-    void delete(Long id);
+    void delete(long id);
 }

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ConnectedService} from '../../../../models/connectedService';
+import {Service} from "../../../../models/service";
+import {HttpService} from "../../../../../services/http.service";
+import {User} from "../../../../models/user";
+import {PersonalData} from "../../../../models/personal-data";
 
 @Component({
   selector: 'app-connected-services',
@@ -8,15 +12,14 @@ import { ConnectedService} from '../../../../models/connectedService';
 })
 export class ConnectedServicesComponent implements OnInit {
 
-  connectedService: ConnectedService = {
+  servs: Service[] = [];
+  customers: PersonalData[] = [];
 
-    nameService: 'Logger',
-    descriptionService: 'fghjk',
-    priceOfService: 10.5
-  };
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
   ngOnInit() {
+    this.httpService.getService().subscribe((data)=>this.servs=data);
+    this.httpService.getCustomer().subscribe((data)=>this.customers = data);
   }
 
 }

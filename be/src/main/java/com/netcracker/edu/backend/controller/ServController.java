@@ -37,8 +37,14 @@ public class ServController {
     }
 
     @DeleteMapping(value = "/delete/{serviceId}")
-    public ResponseEntity delete(@PathVariable (name = "serviceId") Long id) {
+    public ResponseEntity delete(@PathVariable (name = "serviceId") long id) {
         servService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/count/{id}")
+    public long getCountUsers(@PathVariable(name ="id") long id){
+        System.out.println(id);
+        return this.servService.findById(id).getUsers().size();
     }
 }

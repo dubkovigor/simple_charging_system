@@ -1,3 +1,5 @@
+import {Service} from "./service";
+
 export class PersonalData {
 
   id: number;
@@ -7,6 +9,7 @@ export class PersonalData {
   // email: string;
   userID: number;
   ba_ID: number;
+  servs: Service;
   // sex: enumSex;
   // country: enumCountry;
   // purseNumber: number;

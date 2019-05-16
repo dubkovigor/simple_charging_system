@@ -8,5 +8,5 @@ public interface WalletService {
     List<Wallet> findAll();
     Wallet findById(long id);
     Wallet save(Wallet wallet);
-    void delete(Long id);
+    void delete(long id);
 }

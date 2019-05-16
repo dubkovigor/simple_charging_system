@@ -12,13 +12,15 @@ import {LayoutModule} from "./modules/layout/layout.module";
 import {HttpService} from "./services/http.service";
 import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
+import {AdminPageComponent} from "./modules/layout/components/admin-page/admin-page.component";
 
 const routes: Routes = [
   {path: '' , redirectTo: 'main', pathMatch: 'full'},
   {path: 'personal-account', component: PersonalAccountComponent},
   {path: 'login', component: LoginComponent},
   {path: 'main', component: MainPageComponent},
-  {path: 'register', component: RegisterComponent }
+  {path: 'register', component: RegisterComponent },
+  // {path: 'adminpage', component: AdminPageComponent}
 ];
 
 @NgModule({
@@ -33,7 +35,6 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     LayoutModule
   ],
-  providers: [HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

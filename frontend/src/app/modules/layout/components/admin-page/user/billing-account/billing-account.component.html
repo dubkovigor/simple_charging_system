@@ -1,0 +1,21 @@
+<div id="userInfo">
+  <h1><span>Личные данные</span></h1>
+  <h3 id="inf">Данные о пользователях</h3>
+  <table>
+      <td>ID
+        <tr *ngFor="let user of users">{{user.id}}</tr>
+    </td>
+    <td>ID
+      <tr *ngFor="let user of users">{{user.login}}</tr>
+    </td>
+    <td>ID
+      <tr *ngFor="let user of users">{{user.password}}</tr>
+    </td>
+    <td>ID
+      <tr *ngFor="let customer of customers">{{customer.firstName}}</tr>
+    </td>
+    <td>ID
+      <tr *ngFor="let customer of customers">{{customer.secondName}}</tr>
+    </td>
+  </table>
+</div>

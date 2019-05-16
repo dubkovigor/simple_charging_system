@@ -3,6 +3,7 @@ import {PersonalData} from "../../../../models/personal-data";
 import {HttpService} from "../../../../../services/http.service";
 import {User} from "../../../../models/user";
 import {Log} from "@angular/core/testing/src/logger";
+import {Wallet} from "../../../../models/wallet";
 
 // import {enumCountry, enumSex, PersonalData} from '../../../../models/personal-data';
 
@@ -15,14 +16,16 @@ export class PersonalDataComponent implements OnInit {
 
   users: User[] = [];
   customers: PersonalData[] = [];
+  wallets: Wallet[] = [];
 
-  constructor(private httpService: HttpService) { }
 
-  ngOnInit() {console.log('darova');
-  // this.httpService.getUser().subscribe((data) => this.users =data);
-  //   this.httpService.getUser().subscribe()
+  constructor(private httpService: HttpService){}
+
+  ngOnInit() {
     this.httpService.getCustomer()
-      .subscribe((data1) => this.customers = data1, (e) => console.log(e))
+      .subscribe((data1) => this.customers = data1, (e) => console.log(e));
+    this.httpService.getWallet()
+      .subscribe((data1) => this.wallets = data1, (e) => console.log(e));
     this.httpService.getUser()
       .subscribe((data) =>
         this.users = data, (e) => console.log(e));

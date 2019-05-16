@@ -3,13 +3,17 @@
   <h3 id="inf">Основная информация о Вашем балансе</h3>
   <table>
     <tr></tr>
-    <tr>
+    <tr *ngFor="let b of ba">
       <td>№ кошелька</td>
-      <td>{{wallet.purseNumber}}</td>
+      <td>
+        {{b.number}}
+      </td>
     </tr>
-    <tr>
+    <tr *ngFor="let wallet of wallets">
       <td>Доступная сумма</td>
-      <td>{{wallet.amount}}$</td>
+      <td>
+      {{wallet.amount}}$
+      </td>
     </tr>
   </table>
 </div>

@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/wallet")
 public class WalletController {
+
     private WalletService walletService;
 
     @Autowired
@@ -23,18 +24,18 @@ public class WalletController {
         return walletService.findAll();
     }
     @GetMapping(value = "/service/{serviceId}")
-    public ResponseEntity<Wallet> getWalletById(@PathVariable(name = "serviceId") Long walletId) {
+    public ResponseEntity<Wallet> getWalletById(@PathVariable(name = "serviceId") long walletId) {
         Wallet wallet = walletService.findById(walletId);
         return ResponseEntity.ok(wallet);
     }
 
     @PostMapping
-    public Wallet saveUser(@RequestBody Wallet wallet) {
+    public Wallet saveWallet(@RequestBody Wallet wallet) {
         return walletService.save(wallet);
     }
 
     @DeleteMapping(value = "/delete/{walletId}")
-    public ResponseEntity delete(@PathVariable (name = "walletId") Long id) {
+    public ResponseEntity delete(@PathVariable (name = "walletId") long id) {
         walletService.delete(id);
         return ResponseEntity.noContent().build();
     }

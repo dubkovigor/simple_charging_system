@@ -1,8 +1,14 @@
 package com.netcracker.edu.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
+@Table(name = "Serv")
 public class Serv {
 
     @Id
@@ -16,18 +22,53 @@ public class Serv {
     @Column(name = "ServiceDescription")
     private String serviceDescription;
 
-    public Serv() {}
+    @Column(name = "Price")
+    private long price;
 
-    public Serv(String serviceName, String serviceDescription) {
-        this.serviceName = serviceName;
-        this.serviceDescription = serviceDescription;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonBackReference
+    @JoinTable(name = "serv_users",
+        joinColumns = @JoinColumn(name = "servs_id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<User> users;
+
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public Long getId() {
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public Serv() {}
+
+//    public Serv(String serviceName, String serviceDescription) {
+//        this.serviceName = serviceName;
+//        this.serviceDescription = serviceDescription;
+//    }
+
+
+    public Serv(String serviceName, String serviceDescription, long price, Set<User> users) {
+        this.serviceName = serviceName;
+        this.serviceDescription = serviceDescription;
+        this.price = price;
+        this.users = users;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -45,5 +86,22 @@ public class Serv {
 
     public void setServiceDescription(String serviceDescription) {
         this.serviceDescription = serviceDescription;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Serv serv = (Serv) o;
+        return id == serv.id &&
+                price == serv.price &&
+                Objects.equals(serviceName, serv.serviceName) &&
+                Objects.equals(serviceDescription, serv.serviceDescription) &&
+                Objects.equals(users, serv.users);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, serviceName, serviceDescription, price, users);
     }
 }

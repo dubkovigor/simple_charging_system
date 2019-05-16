@@ -8,21 +8,15 @@
   </div>
 </div>
 
-<div id="main">
-  <div class="dash">
+<div id="main" *ngFor="let service of services" >
     <div class="div">
-      <h1><a href="#service" title="Сервисы">{{service.nameService}}</a></h1>
+      {{service.serviceName}}
     </div>
-    <div class="div">
-      <span>{{service.descriptionService}}</span>
+    <div class="div" >
+      {{service.serviceDescription}}
     </div>
     <div>
-      <a href="#" class = "btn">Подписаться за {{service.priceOfService}}$/30 дней</a>
+      <a href="#" class = "btn">Подписаться за {{service.price}}$/30 дней</a>
     </div>
   </div>
-  <div class="dash">
-    <div class="div">
-      <h1>Logaster</h1>
-    </div>
-  </div>
-</div>
+

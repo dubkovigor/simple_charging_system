@@ -7,8 +7,7 @@ package com.netcracker.edu.backend.service;
 public interface BillingAccountService {
     List<BillingAccount> findAll();
     BillingAccount findById(long id);
-    BillingAccount findByNumber(Long number);
-    BillingAccount findByWalletId(Long id);
+    BillingAccount findByWalletId(long id);
     BillingAccount save(BillingAccount billingAccount);
     void delete(Long id);
 }
