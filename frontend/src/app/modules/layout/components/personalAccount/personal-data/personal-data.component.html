@@ -1,19 +1,18 @@
 <div id="userInfo">
   <h1><span>Личные данные</span></h1>
-  <h3 id="inf">Основная информация (например, имя и фото), которую вы используете в наших сервисах.</h3>
+  <h3 id="inf">Основная информация (например, имя и фамилия), которую вы используете в наших сервисах.</h3>
   <table>
-    <tr *ngFor="let user of users">
+    <tr>
       <td>Логин пользователя:</td>
-      <!--<td *ngFor="let user of users">{{user.login}}</td>-->
-      <td>{{(user.login)}}</td>
+      <td>{{(autUser.login)}}</td>
     </tr>
-    <tr *ngFor="let customer of customers">
+    <tr>
       <td>Имя пользователя:</td>
-      <td>{{customer.firstName}}</td>
+      <td>{{autUser.firstName}}</td>
     </tr>
-    <tr *ngFor="let customer of customers">
+    <tr>
       <td>Фамилия пользователя:</td>
-      <td>{{customer.secondName}}</td>
+      <td>{{autUser.secondName}}</td>
     </tr>
   </table>
 </div>

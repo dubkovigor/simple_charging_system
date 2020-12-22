@@ -1,14 +1,10 @@
 <header>
   <div id="logo" onclick="slowScroll('#top')">
-    <span>Netcracker</span>
+    <span>СИЛЬЧЕНКО И. ГР.107</span>
   </div>
 
   <div id="about">
-    <a href="index.html" title="Вернуться на главную">Вернуться на главную</a>
-    <a routerLink="/personal-account" title="Личные данные" onclick="slowScroll('#userInfo')">Личные данные</a>
-    <a href="#" title="Кошелек" onclick="slowScroll('#wallet')">Кошелек</a>
-    <a href="#" title="Подключенные сервиса" onclick="slowScroll('#service')">Подключенные сервисы</a>
-    <a href="#" title="Вернуться на главную"onclick="slowScroll('#accSetting')">Настройка аккаунта</a>
-    <a href="#" title="Выйти">Выйти</a>
+    <a routerLink="" title="Вернуться на главную">Вернуться на главную</a>
+    <a *ngIf="isRole()" (click)="outFromAccount()" >Выйти</a>
   </div>
 </header>

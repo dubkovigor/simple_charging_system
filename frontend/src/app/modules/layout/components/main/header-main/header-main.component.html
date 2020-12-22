@@ -1,18 +1,18 @@
 <header>
   <div id="logo">
-    <span>Netcracker</span>
+    <span routerLink="">СИЛЬЧЕНКО И. ГР.107</span>
   </div>
-  <div>
-    <form action="/logout" method="post">
-      <input type="submit" value="Sign Out"/>
-    </form>
+  <div></div>
+  <div id="about" >
+    <a *ngIf="isRole()" routerLink="personal-account" routerLinkActive="myActive" title="Сервисы">Личный кабинет, {{authUser.login}}</a>
+    <a *ngIf="isRole() && authUser.role.roleName=='ADMIN'" routerLink="adminpage">Страница администратора</a>
+    <a *ngIf="isRole()" (click)="outFromAccount()" >Выйти</a>
+    <a *ngIf="!isRole()" (click)="modalService.openModal(register)"  title="Зарегистрироваться">Зарегистрироваться</a>
+    <a *ngIf="!isRole()" (click)="modalService.openModal(template)" title="Войти">Войти</a>
   </div>
 
-  <div id="about">
-    <a routerLink="/personal-account" title="Сервисы">Личный аккаунт</a>
-    <a title="Сервисы">Сервисы</a>
-    <a title="FAQ">FAQ</a>
-    <a routerLink="/register" title="Зарегистрироваться">Зарегистрироваться</a>
-    <a routerLink="/login" title="Войти">Войти</a>
-  </div>
 </header>
+
+<ng-template #register><app-register></app-register></ng-template>
+<ng-template #template><app-login></app-login></ng-template>
+

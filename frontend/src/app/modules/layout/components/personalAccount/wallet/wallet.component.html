@@ -3,17 +3,24 @@
   <h3 id="inf">Основная информация о Вашем балансе</h3>
   <table>
     <tr></tr>
-    <tr *ngFor="let b of ba">
-      <td>№ кошелька</td>
-      <td>
-        {{b.number}}
+    <tr>
+      <td>Активность</td>
+      <td *ngIf="autUser.ba_Id.active==false">
+        Не активен
+      </td>
+      <td *ngIf="autUser.ba_Id.active==true">
+        Активен
       </td>
     </tr>
-    <tr *ngFor="let wallet of wallets">
+    <tr>
       <td>Доступная сумма</td>
       <td>
-      {{wallet.amount}}$
+      {{autUser.ba_Id.wallet.amount}}$
       </td>
+    </tr>
+    <tr>
+      <td><input type="number" name="amount" placeholder="Введите сумму" [(ngModel)]="inputSum" required  #amount = "ngModel"></td>
+      <td><input type="submit" [disabled]="amount.invalid" (click)="replenishBalance()" value="Пополнить баланс" /></td>
     </tr>
   </table>
 </div>

@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Wallet } from '../../../../models/wallet';
-import {HttpService} from "../../../../../services/http.service";
-import {Billingaccount} from "../../../../models/billingaccount";
+import {Component, OnInit} from '@angular/core';
+import {Wallet} from '../../../../models/wallet';
+import {Billingaccount} from '../../../../models/billingaccount';
+import {HttpService} from '../../../../../services/http.service';
+import {User} from '../../../../models/user';
+import {AuthorizationService} from '../../../../../services/AuthorizationService';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-wallet',
@@ -10,18 +13,34 @@ import {Billingaccount} from "../../../../models/billingaccount";
 })
 export class WalletComponent implements OnInit {
 
-  wallets: Wallet[] = [];
-  ba: Billingaccount[] = [];
+  autUser: User = new User();
 
-  constructor(private httpService: HttpService) { }
+  public inputSum: number;
+
+  constructor(private httpService: HttpService, private authService: AuthorizationService, private toastr: ToastrService) {
+  }
+
 
   ngOnInit() {
+    this.getAuthUser();
+  }
 
-    this.httpService.getBA()
-      .subscribe((data) => this.ba = data);
+  getAuthUser() {
+    this.authService.subscribeToAuthUser().subscribe(value => {
+      this.autUser = value;
+    });
+    this.authService.getAuthUser();
+  }
 
-
-    this.httpService.getWallet()
-      .subscribe((data) => this.wallets = data)
+  replenishBalance() {
+    let updatableWallet = Wallet.cloneWallet(this.autUser.ba_Id.wallet);
+    updatableWallet.amount += this.inputSum;
+    console.log(updatableWallet);
+    this.httpService.saveWallet(updatableWallet).subscribe(data => {
+      console.log(data);
+      this.autUser.ba_Id.wallet.amount = updatableWallet.amount;
+      this.authService.setAuthUser(this.autUser);
+      this.toastr.success('Вы пополнили баланс!');
+    });
   }
 }

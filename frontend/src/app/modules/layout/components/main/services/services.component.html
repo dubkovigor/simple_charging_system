@@ -8,15 +8,16 @@
   </div>
 </div>
 
-<div id="main" *ngFor="let service of services" >
+<div id="main" *ngFor="let service of services">
     <div class="div">
       {{service.serviceName}}
     </div>
     <div class="div" >
-      {{service.serviceDescription}}
+      {{service.serviceDescription}} <img src="{{service.picturePath}}" height="100" width="150">
     </div>
     <div>
-      <a href="#" class = "btn">Подписаться за {{service.price}}$/30 дней</a>
+      <a class = "btn" (click)="subscribeClick(service)">Купить за {{service.price}}$</a>
     </div>
-  </div>
+</div>
+
 

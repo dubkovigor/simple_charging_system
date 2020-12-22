@@ -1,7 +1,6 @@
 package com.netcracker.edu.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -25,11 +24,14 @@ public class Serv {
     @Column(name = "Price")
     private long price;
 
+    @Column(name = "PicturePath")
+    private String picturePath;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonBackReference
     @JoinTable(name = "serv_users",
-        joinColumns = @JoinColumn(name = "servs_id"),
-        inverseJoinColumns = @JoinColumn(name = "user_id")
+            joinColumns = @JoinColumn(name = "servs_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private Set<User> users;
 
@@ -41,7 +43,8 @@ public class Serv {
         this.users = users;
     }
 
-    public Serv() {}
+    public Serv() {
+    }
 
 //    public Serv(String serviceName, String serviceDescription) {
 //        this.serviceName = serviceName;
@@ -49,11 +52,12 @@ public class Serv {
 //    }
 
 
-    public Serv(String serviceName, String serviceDescription, long price, Set<User> users) {
+    public Serv(String serviceName, String serviceDescription, long price, Set<User> users, String picturePath) {
         this.serviceName = serviceName;
         this.serviceDescription = serviceDescription;
         this.price = price;
         this.users = users;
+        this.picturePath = picturePath;
     }
 
     public long getPrice() {
@@ -88,6 +92,15 @@ public class Serv {
         this.serviceDescription = serviceDescription;
     }
 
+    public String getPicturePath() {
+        return picturePath;
+    }
+
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -97,11 +110,12 @@ public class Serv {
                 price == serv.price &&
                 Objects.equals(serviceName, serv.serviceName) &&
                 Objects.equals(serviceDescription, serv.serviceDescription) &&
+                Objects.equals(picturePath, serv.picturePath) &&
                 Objects.equals(users, serv.users);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, serviceName, serviceDescription, price, users);
+        return Objects.hash(id, serviceName, serviceDescription, price, picturePath, users);
     }
 }

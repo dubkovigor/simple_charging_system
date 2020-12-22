@@ -1,16 +1,10 @@
 <header>
   <div id="logo">
-    <span>Netcracker</span>
-  </div>
-  <div>
-    <form action="/logout" method="post">
-      <input type="submit" value="Sign Out"/>
-    </form>
+    <span routerLink="">СИЛЬЧЕНКО И. ГР.107</span>
   </div>
 
   <div id="about">
-    <a routerLink="/personal-account" title="Сервисы">Личный аккаунт</a>
-    <a title="Сервисы">Сервисы</a>
-    <a routerLink="/logout" title="Выйти">Выйти</a>
+    <a *ngIf="isRole()" routerLink="" routerLinkActive="myActive" title="Сервисы">Главная</a>
+    <a *ngIf="isRole()" (click)="outFromAccount()" >Выйти</a>
   </div>
 </header>

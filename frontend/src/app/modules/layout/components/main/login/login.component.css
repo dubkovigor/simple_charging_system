@@ -257,3 +257,12 @@ form:after {
   background-position: 0 -135px;
   color: #00aeef;
 }
+
+.lol{
+  max-width: 50%;
+  margin: 0 auto;
+  padding: 10px;
+}
+.lol .btn btn-dark{
+  margin: 20px;
+}

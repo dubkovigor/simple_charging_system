@@ -81,3 +81,7 @@ header.fixed #logo {
 
 .fixed #about a {color: #343434}
 .fixed #about a:hover {color: #7c7c7c}
+
+.modal-dialog{
+  width: 0;
+}

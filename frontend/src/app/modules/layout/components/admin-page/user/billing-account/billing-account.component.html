@@ -1,21 +1,100 @@
-<div id="userInfo">
-  <h1><span>Личные данные</span></h1>
-  <h3 id="inf">Данные о пользователях</h3>
-  <table>
-      <td>ID
-        <tr *ngFor="let user of users">{{user.id}}</tr>
-    </td>
-    <td>ID
-      <tr *ngFor="let user of users">{{user.login}}</tr>
-    </td>
-    <td>ID
-      <tr *ngFor="let user of users">{{user.password}}</tr>
-    </td>
-    <td>ID
-      <tr *ngFor="let customer of customers">{{customer.firstName}}</tr>
-    </td>
-    <td>ID
-      <tr *ngFor="let customer of customers">{{customer.secondName}}</tr>
-    </td>
-  </table>
-</div>
+<div class="container mt-lg-5">
+  <div class="row">
+
+    <div class="col">
+
+      <h4>User accounts:</h4>
+
+      <table class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">Логин</th>
+          <th scope="col">Имя</th>
+          <th scope="col">Фамиилия</th>
+          <th scope="col">Роль</th>
+          <th scope="col">Информация</th>
+          <th scope="col">Удаление</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.login}}</td>
+          <td>{{user.firstName}}</td>
+          <td>{{user.secondName}}</td>
+          <td>{{user.role.roleName}}</td>
+          <!--<td *ngFor="let customer of customers">{{customer.secondName}}</td>-->
+          <!--<td *ngFor="let customer of customers">{{customer.userID}}</td>-->
+          <td><button type="button" class="btn btn-danger" (click)="openModal(template, user)">Информация</button> </td>
+          <td><button type="button" class="btn btn-danger" (click)="_deleteUser(user.id)">Удалить</button></td>
+        </tr>
+
+        </tbody>
+      </table>
+      <div>
+        <p>Количество пользователей: {{users ? users.length : 0}}</p>
+      </div>
+
+      <!--<div>-->
+        <!--<p>Billing Accounts count: {{billingAccounts ? billingAccounts.length : 0}}</p>-->
+      <!--</div>-->
+
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="row">-->
+    <!--<div class="col">-->
+      <!--<button type="button" class="btn btn-dark" (click)="_updateBillingAccounts()">Update</button>-->
+
+    <!--</div>-->
+    <!--<div class="col">-->
+      <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"-->
+              <!--(click)="_openModal(template)">-->
+        <!--Create new billing account-->
+      <!--</button>-->
+    <!--</div>-->
+  <!--</div>-->
+
+<!--</div>-->
+
+
+<!--<!- -->
+      <ng-template #template>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">Информация</h4>
+          <button type="button" class="close pull-right"
+                  aria-label="Close" (click)="modalService.closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <table class="table">
+              <thead class="thead-dark">
+              <tr>
+                <th scope="col">Название сервиса</th>
+                <th scope="col">Описание</th>
+                <th scope="col">Цена</th>
+              </tr>
+              <tr *ngFor="let serv of selectedUser.servs">
+                <td scope="row">{{serv.serviceName}}</td>
+                <td>{{serv.serviceDescription}}</td>
+                <td>{{serv.price}}</td>
+              </tr>
+              </thead>
+            </table>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" (click)="createService(serviceName, serviceDescription, price)">ОК
+          </button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modalService.closeModal()">НЕ ОК</button>
+
+        </div>
+      </ng-template>
+
+
+
+
+
+
+

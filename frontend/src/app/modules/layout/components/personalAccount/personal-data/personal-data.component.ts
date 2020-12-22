@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {PersonalData} from "../../../../models/personal-data";
-import {HttpService} from "../../../../../services/http.service";
-import {User} from "../../../../models/user";
-import {Log} from "@angular/core/testing/src/logger";
-import {Wallet} from "../../../../models/wallet";
+import {Wallet} from '../../../../models/wallet';
+import {User} from '../../../../models/user';
+import {HttpService} from '../../../../../services/http.service';
+import {AuthorizationService} from '../../../../../services/AuthorizationService';
 
 // import {enumCountry, enumSex, PersonalData} from '../../../../models/personal-data';
 
@@ -14,22 +13,27 @@ import {Wallet} from "../../../../models/wallet";
 })
 export class PersonalDataComponent implements OnInit {
 
-  users: User[] = [];
-  customers: PersonalData[] = [];
+
+  autUser: User = new User();
   wallets: Wallet[] = [];
 
 
-  constructor(private httpService: HttpService){}
+  constructor(private httpService: HttpService, private  authService: AuthorizationService) {}
 
   ngOnInit() {
-    this.httpService.getCustomer()
-      .subscribe((data1) => this.customers = data1, (e) => console.log(e));
-    this.httpService.getWallet()
-      .subscribe((data1) => this.wallets = data1, (e) => console.log(e));
-    this.httpService.getUser()
-      .subscribe((data) =>
-        this.users = data, (e) => console.log(e));
-    //
+    // this.httpService.getWallet()
+    //   .subscribe((data1) => this.wallets = data1, (e) => console.log(e));
+    // this.httpService.getUser()
+    //   .subscribe((data) =>
+    //     this.users = data, (e) => console.log(e));
+    // //
+    this.getAuthUser();
+  }
 
+  getAuthUser() {
+    this.authService.subscribeToAuthUser().subscribe(value => {
+      this.autUser = value;
+    });
+    this.authService.getAuthUser();
   }
 }

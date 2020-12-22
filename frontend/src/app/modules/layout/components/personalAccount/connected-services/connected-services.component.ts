@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ConnectedService} from '../../../../models/connectedService';
-import {Service} from "../../../../models/service";
-import {HttpService} from "../../../../../services/http.service";
-import {User} from "../../../../models/user";
-import {PersonalData} from "../../../../models/personal-data";
+import {Component, OnInit} from '@angular/core';
+import {Service} from '../../../../models/service';
+import {HttpService} from '../../../../../services/http.service';
+import {AuthorizationService} from '../../../../../services/AuthorizationService';
+import {User} from '../../../../models/user';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-connected-services',
@@ -13,13 +13,35 @@ import {PersonalData} from "../../../../models/personal-data";
 export class ConnectedServicesComponent implements OnInit {
 
   servs: Service[] = [];
-  customers: PersonalData[] = [];
+  authUser: User = new User();
 
-  constructor(private httpService: HttpService) { }
-
-  ngOnInit() {
-    this.httpService.getService().subscribe((data)=>this.servs=data);
-    this.httpService.getCustomer().subscribe((data)=>this.customers = data);
+  constructor(private httpService: HttpService, private  authService: AuthorizationService, private toastr: ToastrService) {
   }
 
+  ngOnInit() {
+    this.getAuthUser();
+  }
+
+  unsubscribeClick(service: Service) {
+    this.httpService.unsubscribeUser(this.authUser, service)
+      .subscribe(user => {
+        this.authService.setAuthUser(user);
+      }, () => this.toastr.error('Что-то пошло не так'),
+        () => this.toastr.success('Товар удален из истории покупок', service.serviceName));
+  }
+
+  getAuthUser() {
+    this.authService.subscribeToAuthUser().subscribe(value => {
+      this.authUser = value;
+    });
+    this.authService.getAuthUser();
+  }
+
+  nameSubs(): string {
+    let subs = '';
+    this.authUser.servs.forEach(value => {
+      subs += value.serviceName + ' , ';
+    });
+    return subs;
+  }
 }

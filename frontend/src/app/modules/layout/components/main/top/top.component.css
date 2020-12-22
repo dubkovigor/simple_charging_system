@@ -1,6 +1,7 @@
 #top {
   width: 100%;
-  background-image: url(https://media.glassdoor.com/l/7e/13/c7/2b/sylvain-talks-strategy.jpg);
+  /*background-image: url(https://media.glassdoor.com/l/7e/13/c7/2b/sylvain-talks-strategy.jpg);*/
+  background-image: url(https://qwintry.com/files/article/159/images/amazon-pic.png);
   background-blend-mode: multiply;
   background-color: #2e3a44;
   background-size: cover;
@@ -37,6 +38,6 @@
 }
 
 #divvv {
-  font-size: 4em;
+  font-size: 2em;
   padding-top: 20%;
 }

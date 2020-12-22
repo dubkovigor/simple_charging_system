@@ -1,3 +1,142 @@
-<p>
-  service works!
-</p>
+<div class="container mt-lg-5">
+  <div class="row">
+
+    <div class="col">
+
+      <h4>Services:</h4>
+
+      <table class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Название сервиса</th>
+          <th scope="col">Описание</th>
+          <th scope="col">Цена</th>
+          <th scope="col">Изображение</th>
+          <th scope="col">Количество</th>
+          <th scope="col">Удалить</th>
+          <th scope="col">Изменить</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let service of services">
+          <td scope="row">{{service.id}}</td>
+          <td>{{service.serviceName}}</td>
+          <td>{{service.serviceDescription}}</td>
+          <td>{{service.price}}</td>
+          <td><img src={{service.picturePath}} width="100%" height="400"></td>
+          <td>{{service.countUsers}}</td>
+          <!--<td *ngFor="let customer of customers">{{customer.userID}}</td>-->
+          <td><button type="button" class="btn btn-danger" (click)="deleteService(service.id)">Удалить</button></td>
+          <td><button type="button" class="btn btn-secondary" (click)="openModal(template, service)">Изменить</button></td>
+        </tr>
+
+        </tbody>
+      </table>
+
+      <div>
+        <p>Количество сервисов: {{services ? services.length : 0}}</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button type="button" class="btn btn-dark" (click)="updateService()">Изменить</button>
+
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+              (click)="modalService.openModal(template)">
+        Создать новый сервис
+      </button>
+    </div>
+  </div>
+
+</div>
+
+
+<!--&lt;!&ndash; Modal &ndash;&gt;-->
+<!--<ng-template #template>-->
+  <!--<div>-->
+    <!--<h4>{{editMode ? "Edit": "Create"}}  new Servicet</h4>-->
+    <!--<button type="button" (click)="closeModal()">-->
+      <!--<span>&times;</span>-->
+    <!--</button>-->
+  <!--</div>-->
+  <!--<div >-->
+    <!--<div>-->
+      <!--<label>Username</label>-->
+      <!--<input name="price" [(ngModel)]="newService.price" #price="ngModel" required/>-->
+    <!--</div>-->
+    <!--<div>-->
+      <!--<label>E-mail</label>-->
+      <!--<input class="form-control" name="serviceName" [(ngModel)]="newService.serviceName" #serviceName="ngModel"-->
+             <!--required pattern="[a-zA-Z0-9_]"/>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div>-->
+      <!--<label>Address</label>-->
+      <!--<input class="form-control" name="serviceDescription" [(ngModel)]="newService.serviceDescription" #serviceDescription="ngModel" required/>-->
+    <!--</div>-->
+
+  <!--<div>-->
+    <!--<button type="button"(click)="createService(price, serviceName, serviceDescription)">-->
+      <!--{{editMode ? "Save": "Create"}}-->
+    <!--</button>-->
+    <!--<button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Close</button>-->
+
+  <!--</div>-->
+<!--</ng-template>-->
+
+
+<!--!&#45;&#45; Modal &ndash;&gt;-->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{editMode ? "Изменить": "Создать"}} новый сервис</h4>
+    <button type="button" class="close pull-right"
+            aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label>Название сервиса</label>
+      <input class="form-control" name="serviceName" [(ngModel)]="newService.serviceName" #serviceName="ngModel" required pattern="[a-zA-Z\s]{3,15}"/>
+      <div [hidden]="serviceName.valid || serviceName.untouched" class="alert alert-danger">
+        Пожалуйста, введите название <!--Easy way to create client validation-->
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Описание</label>
+      <input class="form-control" name="serviceDescription" [(ngModel)]="newService.serviceDescription" #serviceDescription="ngModel"
+             required pattern="[a-zA-Z0-9\s]{3,1000}"/>
+      <div [hidden]="serviceDescription.valid || serviceDescription.untouched" class="alert alert-danger">
+        Пожалуйста, введите описание
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Цена</label>
+      <input class="form-control" name="price" [(ngModel)]="newService.price" #price="ngModel" required pattern="[0-9]{1,5}"/>
+      <div [hidden]="price.valid || price.untouched" class="alert alert-danger">
+        Пожалуйста, введите цену
+      </div>
+    </div>
+    <div class="form-group">
+      <img src={{newService.picturePath}} height="200" width="200">
+        <input type="file" [(ngModel)]="newService.picturePath" (change)= "FilePathHandler($event)" >
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-dark" (click)="createService(serviceName, serviceDescription, price, picturePath)">
+      ОК
+    </button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modalService.closeModal()">НЕ ОК</button>
+
+  </div>
+</ng-template>
+
+
+
+

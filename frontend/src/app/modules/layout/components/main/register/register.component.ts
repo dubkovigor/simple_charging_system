@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from "../../../../models/user";
-import {HttpService} from "../../../../../services/http.service";
-import {PersonalData} from "../../../../models/personal-data";
+import {User} from '../../../../models/user';
+import {HttpService} from '../../../../../services/http.service';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {ModalService} from '../../../../../services/ModalService';
 
 @Component({
   selector: 'app-register',
@@ -9,22 +11,24 @@ import {PersonalData} from "../../../../models/personal-data";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
   user: User = new User();
   repeatPassword: string;
-  customer: PersonalData = new PersonalData();
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService, private router: Router, private modalService: ModalService, private toastr: ToastrService) { }
 
-  saveCustomer(){
-    console.log(this.customer);
-    this.httpService.saveCustomer(this.customer)
-      .subscribe((data)=> console.log(data));
-  }
-
-  saveUser(){
-    console.log(this.user);
-    this.httpService.saveUser(this.user)
-      .subscribe((data)=> console.log(data));
+  saveUser() {
+    if (this.user.password === this.repeatPassword  ) {
+      console.log(this.user);
+      this.httpService.saveUser(this.user)
+        .subscribe((data) => {
+          console.log(data);
+          this.router.navigateByUrl('/main');
+          this.toastr.success('Вы зарегистрированы!');
+          this.modalService.closeModal();
+        },() => {
+        this.toastr.error("Что-то пошло не так :(");});
+    } else {
+      this.toastr.info('Проверьте данные еще раз');
+    }
   }
 
   ngOnInit() {

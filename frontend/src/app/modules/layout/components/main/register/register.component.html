@@ -1,26 +1,50 @@
-<div class="container">
-  <section id="content">
-    <form action="">
-      <h1>Регистрация</h1>
-      <div>
-        <input type="text" placeholder="login" name="login" [(ngModel)]="user.login" #login="ngModel" required="" id="login" />
-      </div>
-      <div>
-        <input type="password" placeholder="password" name="password" [(ngModel)]="user.password" #password="ngModel" required="" id="password" />}}
-      </div>
-      <div>
-        <input type="password" placeholder="password" name="repeatPass" [(ngModel)]="repeatPassword" #repeatPass="ngModel" required="" id="password" />
-      </div>
-      <div>
-        <input type="firstName" placeholder="firstName" name="firstName" [(ngModel)]="" #repeatPass="ngModel" required="" id="firstName" />
-      </div>
-      <div>
-        <input type="secondName" placeholder="secondName" name="secondName" [(ngModel)]="" #repeatPass="ngModel" required="" id="secondName" />
-      </div>
-      <div>
-        <input type="submit" (click)="saveUser()" value="Регистрация" />
-      </div>
-    </form><!-- form -->
+<div class="modal-header">
 
-  </section><!-- content -->
-</div><!-- container -->
+  <h4 class="modal-title pull-left">Регистрация</h4>
+  <button type="button" class="close pull-right"
+          aria-label="Close" (click)="modalService.closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="lol">
+    <div class="form-group">
+      <input class="form-control" type="text" placeholder="Логин" name="login" [(ngModel)]="user.login" #login="ngModel" required="" id="login" required pattern="[a-zA-Z0-9_]{3,30}" />
+      </div>
+    <div [hidden]="login.valid || login.untouched" class="alert alert-danger">Пароль должен содержать от 5 до 25 символов и может состоять только из символов латинского алфавита, цифр, знака подчеркивания
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="password" placeholder="Пароль" name="password" [(ngModel)]="user.password" #pass="ngModel" required="" id="password" required pattern="[a-zA-Z0-9_]{3,30}" />
+      <div [hidden]="pass.valid || pass.untouched" class="alert alert-danger">
+        Пароль должен содержать от 3 до 20 символов
+      </div>
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="password" placeholder="Подтвердить пароль" name="password" [(ngModel)]="repeatPassword" #repeatPass="ngModel" required="" id="password" required pattern="[a-zA-Z0-9_]{3,30}" />
+      <div [hidden]="user.password == repeatPassword || pass.untouched || repeatPass.untouched "  class="alert alert-danger">
+        Пароли не совападают
+      </div>
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="text" placeholder="Имя" name="firstName" [(ngModel)]="user.firstName" #firstName="ngModel" required="" id="firstName" required pattern="[a-zA-Z0-9_]{3,30}" />
+      <div [hidden]="firstName.untouched || firstName.valid"  class="alert alert-danger">
+        Pls set first name
+      </div>
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="text" placeholder="Фамилия" name="secondName" [(ngModel)]="user.secondName" #secondName="ngModel" required="" id="secondName" required pattern="[a-zA-Z0-9_]{3,30}" />
+      <div [hidden]="secondName.untouched || secondName.valid"  class="alert alert-danger">
+        Pls set second name
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="lol">
+      <button type="button" class="btn btn-dark" (click)="saveUser()">ОК
+      </button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modalService.closeModal()">НЕ ОК</button>
+    </div>
+  </div>
+
+</div>
+

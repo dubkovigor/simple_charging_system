@@ -1,28 +1,23 @@
 <div id="service">
   <h1><span>Сервисы</span></h1>
-  <h3 id="inf">Информация о подписках</h3>
+  <h3 id="inf">Купленные товары</h3>
   <table>
     <thead>
     <tr>
       <td>Подключенные сервисы</td>
-      <td>Дата окончания подписки</td>
+      <td>Описание сервиса</td>
       <td>Цена</td>
+      <td>Отписаться</td>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let customer of customers">
-      <td>{{customer.servs.serviceName}}</td>
-
-    </tr>
-    <tr>
-      <td>Имя #2</td>
-      <td>Характеристики</td>
-      <td>Стоимость</td>
-    </tr>
-    <tr>
-      <td>Имя #3</td>
-      <td>Характеристики</td>
-      <td>Стоимость</td>
+    <tr *ngFor="let serv of authUser.servs">
+      <td>{{serv.serviceName}}</td>
+      <td>{{serv.serviceDescription}}</td>
+      <td>{{serv.price}}</td>
+      <td><div>
+        <button (click)="unsubscribeClick(serv)">Удалить из истории</button>
+      </div></td>
     </tr>
     </tbody>
   </table>
