@@ -15,10 +15,10 @@ public class ServController {
     public ServController(ServService servService) {
         this.servService = servService;
     }
+
     @GetMapping(value = "/service/{serviceName}")
     public ResponseEntity<Serv> getUserByserveName(@PathVariable(name = "serviceName") String serveName) {
-        Serv serv = servService.findByServiceName(serveName);
-        return ResponseEntity.ok(serv);
+        return ResponseEntity.ok(servService.findByServiceName(serveName));
     }
 
     @GetMapping(value = "id/{id}")
@@ -33,18 +33,22 @@ public class ServController {
 
     @RequestMapping(method = RequestMethod.POST)
     public Serv saveService(@RequestBody Serv serv) {
-        return servService.save(serv);
+        return servService.save(changePicturePath(serv));
+    }
+
+    public Serv changePicturePath(Serv serv) {
+        serv.setPicturePath(serv.getPicturePath().replace("C:\\fakepath\\", "/assets/img/"));
+        return serv;
     }
 
     @DeleteMapping(value = "/delete/{serviceId}")
-    public ResponseEntity delete(@PathVariable (name = "serviceId") long id) {
+    public ResponseEntity delete(@PathVariable(name = "serviceId") long id) {
         servService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping(value = "/count/{id}")
-    public long getCountUsers(@PathVariable(name ="id") long id){
-        System.out.println(id);
+    public long getCountUsers(@PathVariable(name = "id") long id) {
         return this.servService.findById(id).getUsers().size();
     }
 }
