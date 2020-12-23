@@ -10,4 +10,5 @@ import java.util.List;
 public interface ServRepository extends CrudRepository<Serv, Long> {
     Serv findByServiceName(String serviceName);
     Serv findById(long id);
+    List<Serv> findByCategory(String category);
 }

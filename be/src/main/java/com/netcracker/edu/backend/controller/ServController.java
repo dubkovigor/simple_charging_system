@@ -26,6 +26,11 @@ public class ServController {
         return servService.findById(id);
     }
 
+    @GetMapping(value = "{category}")
+    public List<Serv> findServiceById(@PathVariable(name = "category") String category) {
+        return servService.findByCategory(category);
+    }
+
     @GetMapping(value = "")
     public List<Serv> getAllService() {
         return servService.findAll();

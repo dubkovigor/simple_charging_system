@@ -56,4 +56,10 @@ public class ServServiceImpl implements ServService {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(backendServerUrl + "/api/service/count/" + id, Long.class);
     }
+
+    @Override
+    public List<Serv> findByCategory(String category) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(backendServerUrl + "/api/service/" + category, List.class);
+    }
 }

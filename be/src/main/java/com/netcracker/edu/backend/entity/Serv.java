@@ -27,6 +27,9 @@ public class Serv {
     @Column(name = "PicturePath")
     private String picturePath;
 
+    @Column(name = "Category")
+    private String category;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonBackReference
     @JoinTable(name = "serv_users",
@@ -100,6 +103,13 @@ public class Serv {
         this.picturePath = picturePath;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -111,11 +121,25 @@ public class Serv {
                 Objects.equals(serviceName, serv.serviceName) &&
                 Objects.equals(serviceDescription, serv.serviceDescription) &&
                 Objects.equals(picturePath, serv.picturePath) &&
+                Objects.equals(category, serv.category) &&
                 Objects.equals(users, serv.users);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, serviceName, serviceDescription, price, picturePath, users);
+        return Objects.hash(id, serviceName, serviceDescription, price, picturePath, category, users);
+    }
+
+    @Override
+    public String toString() {
+        return "Serv{" +
+                "id=" + id +
+                ", serviceName='" + serviceName + '\'' +
+                ", serviceDescription='" + serviceDescription + '\'' +
+                ", price=" + price +
+                ", picturePath='" + picturePath + '\'' +
+                ", category='" + category + '\'' +
+                ", users=" + users +
+                '}';
     }
 }

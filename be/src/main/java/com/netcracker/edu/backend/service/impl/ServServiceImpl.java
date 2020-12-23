@@ -31,6 +31,11 @@ public class ServServiceImpl implements ServService {
     }
 
     @Override
+    public List<Serv> findByCategory(String category) {
+        return servRepository.findByCategory(category);
+    }
+
+    @Override
     public Serv save(Serv serv) {
         return servRepository.save(serv);
     }

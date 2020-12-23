@@ -1,8 +1,9 @@
 #top {
   width: 100%;
+  height:100%;
   /*background-image: url(https://media.glassdoor.com/l/7e/13/c7/2b/sylvain-talks-strategy.jpg);*/
-  background-image: url(https://qwintry.com/files/article/159/images/amazon-pic.png);
-  background-blend-mode: multiply;
+  background-image: url(https://img.5element.by/upload/rk/121/121c5845d88f32b9dd3b439f81e286d3.jpg);
+
   background-color: #2e3a44;
   background-size: cover;
   text-align: center;

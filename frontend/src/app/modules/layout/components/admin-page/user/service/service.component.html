@@ -3,13 +3,13 @@
 
     <div class="col">
 
-      <h4>Services:</h4>
+      <h4>Товары:</h4>
 
       <table class="table">
         <thead class="thead-dark">
         <tr>
           <th scope="col">Id</th>
-          <th scope="col">Название сервиса</th>
+          <th scope="col">Название товара</th>
           <th scope="col">Описание</th>
           <th scope="col">Цена</th>
           <th scope="col">Изображение</th>
@@ -24,7 +24,7 @@
           <td>{{service.serviceName}}</td>
           <td>{{service.serviceDescription}}</td>
           <td>{{service.price}}</td>
-          <td><img src={{service.picturePath}} width="100%" height="400"></td>
+          <td><img src="{{service.picturePath}}" width="100%" height="400"></td>
           <td>{{service.countUsers}}</td>
           <!--<td *ngFor="let customer of customers">{{customer.userID}}</td>-->
           <td><button type="button" class="btn btn-danger" (click)="deleteService(service.id)">Удалить</button></td>
@@ -130,9 +130,9 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-dark" (click)="createService(serviceName, serviceDescription, price, picturePath)">
-      ОК
+      Сохранить
     </button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modalService.closeModal()">НЕ ОК</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modalService.closeModal()">Закрыть</button>
 
   </div>
 </ng-template>

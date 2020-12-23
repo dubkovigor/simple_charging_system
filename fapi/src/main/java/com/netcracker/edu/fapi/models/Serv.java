@@ -5,14 +5,18 @@ public class Serv {
     private String serviceDescription;
     private String serviceName;
     private long price;
+    private String category;
+    private String picturePath;
 
     public Serv() {}
 
-    public Serv(long id, String serviceDescription, String serviceName, long price) {
+    public Serv(long id, String serviceDescription, String serviceName, long price, String category, String picturePath) {
         this.id = id;
         this.serviceDescription = serviceDescription;
         this.serviceName = serviceName;
         this.price = price;
+        this.category = category;
+        this.picturePath = picturePath;
     }
 
     public long getId() {
@@ -45,6 +49,22 @@ public class Serv {
 
     public void setPrice(long price) {
         this.price = price;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getPicturePath() {
+        return picturePath;
+    }
+
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
     }
 
     @Override

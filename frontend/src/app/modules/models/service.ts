@@ -6,6 +6,7 @@ export class Service {
   serviceName: string;
   countUsers: number;
   picturePath: string;
+  category: string;
 
   static cloneBase(service: Service): Service {
     const clonedService: Service = new Service();
@@ -14,6 +15,7 @@ export class Service {
     clonedService.serviceDescription = service.serviceDescription;
     clonedService.serviceName = service.serviceName;
     clonedService.picturePath = service.picturePath;
+    clonedService.category = service.category;
     return clonedService;
   }
 }

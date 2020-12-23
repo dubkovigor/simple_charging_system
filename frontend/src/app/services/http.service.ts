@@ -39,6 +39,20 @@ export class HttpService {
 
   getService(): Observable<Service[]> {
     return this.http.get<Service[]>('http://localhost:8082/api/service');
+   }
+
+  getFirstService(): Observable<Service[]> {
+    return this.http.get<Service[]>('http://localhost:8082/api/service/first');
+}
+  getSecondService(): Observable<Service[]> {
+    return this.http.get<Service[]>('http://localhost:8082/api/service/second');
+}
+  getThirdService(): Observable<Service[]> {
+   return this.http.get<Service[]>('http://localhost:8082/api/service/third');
+  }
+
+  getServicesByCategory(category: string): Observable<Service[]> {
+    return this.http.get<Service[]>('http://localhost:8082/api/service/'+ category);
   }
 
   saveService(service: Service): Observable<Service> {

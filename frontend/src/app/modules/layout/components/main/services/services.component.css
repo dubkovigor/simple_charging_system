@@ -28,9 +28,10 @@
 }
 
 .div1{
-  width: 48%;
+left: 300pt;
+  width: 100%;
   margin-right: 2%;
-  float: left;
+  float: none;
 }
 
 .dash{

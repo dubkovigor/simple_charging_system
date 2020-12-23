@@ -15,6 +15,10 @@ import {ToastrService} from 'ngx-toastr';
 export class ServicesComponent implements OnInit {
 
   services: Service[] = [];
+  services1: Service[] = [];
+  secondServices: Service[] = [];
+  thirdServices: Service[] = [];
+  uniqueService: Service[] = [];
   authUser: User = new User();
 
   constructor(private httpService: HttpService, private autUser: AuthorizationService, private toastr: ToastrService) { }
@@ -30,7 +34,22 @@ export class ServicesComponent implements OnInit {
     });
     this.autUser.getAuthUser();
     this.httpService.getService()
-      .subscribe((data1) => this.services = data1, (e) => console.log(e));
+      .subscribe((data1) => {
+
+      this.services = data1;
+      for(let i = 0; i<this.services.length; i++){
+        if(this.services[i].category =='AUDIO'){
+        this.services1.push(this.services[i]);
+      }
+      if(this.services[i].category =='VIDEO'){
+        this.secondServices.push(this.services[i]);
+        }
+      if(this.services[i].category =='MOBILE'){
+        this.thirdServices.push(this.services[i]);
+        }
+        this.uniqueService = this.services;
+        }
+      }, (e) => console.log(e));
   }
 
   subscribeClick(service: Service) {
@@ -49,6 +68,19 @@ export class ServicesComponent implements OnInit {
           });
       }
     } else this.toastr.error('Авторизириуйтесь!');
+  }
+
+  getAudio(){
+  this.services = this.services1;
+  }
+  getAll(){
+  this.services = this.uniqueService;
+  }
+  getTV(){
+  this.services = this.secondServices;
+  }
+  getMobile(){
+  this.services = this.thirdServices;
   }
 
   unsubscribeClick(service: Service) {

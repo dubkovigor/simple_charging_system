@@ -11,4 +11,5 @@ public interface ServService {
     Serv save(Serv serv);
     void delete(long id);
     long countUser(long id);
+    List<Serv> findByCategory(String category);
 }

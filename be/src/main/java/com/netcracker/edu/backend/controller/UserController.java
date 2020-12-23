@@ -93,4 +93,9 @@ public class UserController {
         return user;
     }
 
+    public User writeOffMoney(User user, Serv service){
+        user.getBa_Id().getWallet().setAmount(user.getBa_Id().getWallet().getAmount() - service.getPrice());
+        return user;
+    }
+
 }

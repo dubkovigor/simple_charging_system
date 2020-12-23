@@ -45,4 +45,9 @@ public class ServController {
     public long countUser(@PathVariable(name = "id") long id){
         return servService.countUser(id);
     }
+
+    @GetMapping(value = "/{category}")
+    public List<Serv> countUser(@PathVariable(name = "category") String category){
+        return servService.findByCategory(category);
+    }
 }

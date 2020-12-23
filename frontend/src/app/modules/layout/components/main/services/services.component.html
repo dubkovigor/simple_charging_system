@@ -1,19 +1,30 @@
 <div id="main">
   <div class="div1">
-    <h2>Наши услуги помогут вам!</h2>
+    <h2>Категории товров</h2>
     <span>Большой выбор всего, что может вам пригодиться</span>
+    <div>
+      <a class = "btn" (click)="getAudio()">Аудиотехника</a>
+    </div>
+    <div>
+      <a class = "btn"(click)="getTV()">Видеотехника</a>
+    </div>
+    <div>
+      <a class = "btn" (click)="getMobile()">Мобильные телефоны</a>
+    </div><div>
+      <a class = "btn" (click)="getAll()">Показать все</a>
+    </div>
   </div>
-  <div class="div1">
-    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos impedit, ut vero commodi voluptate? Ipsam reiciendis, necessitatibus incidunt ipsa quis sapiente excepturi, optio iusto voluptatibus dolorem officia quidem, numquam eaque minus, autem praesentium rem architecto dolores. Ipsa unde id velit optio magni enim! Illum obcaecati, dolorem distinctio nemo, ipsum iure.</span>
-  </div>
+
+
 </div>
 
 <div id="main" *ngFor="let service of services">
+  <div class="div"><img src="{{service.picturePath}}" height="200" width="150"></div>
     <div class="div">
       {{service.serviceName}}
     </div>
     <div class="div" >
-      {{service.serviceDescription}} <img src="{{service.picturePath}}" height="100" width="150">
+      {{service.serviceDescription}}
     </div>
     <div>
       <a class = "btn" (click)="subscribeClick(service)">Купить за {{service.price}}$</a>
